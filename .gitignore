@@ -195,3 +195,4 @@ cython_debug/
 
 artifacts/
 raw/
+template.py
