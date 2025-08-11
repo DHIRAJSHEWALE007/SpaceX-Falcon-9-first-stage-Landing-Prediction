@@ -1,0 +1,13 @@
+ipykernel
+python-box
+ensure
+pyyaml
+beautifulsoup4
+requests
+pandas
+scikit-learn
+fastapi
+uvicorn
+Jinja2
+python-multipart
+-e .

@@ -1,0 +1,23 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  data_url: https://api.spacexdata.com/v4/launches/past
+  data_path: artifacts/data_ingestion/data.csv
+
+data_preprocessing:
+  root_dir: artifacts/data_preprocessing
+  data_path: artifacts/data_ingestion/data.csv
+  encoder_ckpt: artifacts/data_ingestion/encoder.pkl
+  processed_data_path: artifacts/data_preprocessing/processed_data.csv
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  data_path: artifacts/data_preprocessing/processed_data.csv
+  evaluation_result_path: artifacts/model_evaluation/results.csv
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  data_path: artifacts/data_preprocessing/processed_data.csv
+  scaler_ckpt: artifacts/model_trainer/scaler.pkl
+  model_ckpt: artifacts/model_trainer/model.pkl

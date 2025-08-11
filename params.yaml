@@ -1,0 +1,29 @@
+evaluation_params: 
+  logisticregression: 
+    C: [0.01,0.1,1]
+    penalty: ['l2']
+    solver: ['lbfgs']
+
+  svc: 
+    kernel: ['linear', 'rbf', 'poly', 'sigmoid']
+    C: [0.001, 0.0316, 1.0, 31.6228, 1000.0]
+    gamma: [0.001, 0.0316, 1.0, 31.6228, 1000.0]
+
+  decisiontreeclassifier: 
+    criterion: ['gini', 'entropy']
+    splitter: ['best', 'random']
+    max_depth: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+    max_features: ['log2', 'sqrt']
+    min_samples_leaf: [1, 2, 4]
+    min_samples_split: [2, 5, 10]
+
+  kneighborsclassifier:
+    n_neighbors: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    algorithm: ['auto', 'ball_tree', 'kd_tree', 'brute']
+    p: [1,2]
+
+training_params:
+  svc: 
+    C: 0.0316
+    gamma: 0.001
+    kernel: 'linear'

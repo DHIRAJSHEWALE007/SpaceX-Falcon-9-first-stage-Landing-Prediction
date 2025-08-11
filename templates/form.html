@@ -1,0 +1,219 @@
+<!-- templates/form.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpaceX Landing Prediction</title>
+</head>
+<body>
+    <h2>Enter Rocket Launch Details</h2>
+    <form action="/predict/" method="post">
+        FlightNumber: <input type="number" name="FlightNumber"><br><br>
+        PayloadMass: <input type="number" step="any" name="PayloadMass"><br><br>
+        Orbit: 
+        <select name="Orbit">
+            {% for o in orbits %}
+            <option value="{{ o }}">{{ o }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        LaunchSite: 
+        <select name="LaunchSite">
+            {% for l in launch_sites %}
+            <option value="{{ l }}">{{ l }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        Flights: <input type="number" name="Flights"><br><br>
+
+        GridFins: 
+        <select name="GridFins">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select><br><br>
+
+        Reused: 
+        <select name="Reused">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select><br><br>
+
+        Legs: 
+        <select name="Legs">
+            <option value="True">True</option>
+            <option value="False">False</option>
+        </select><br><br>
+
+        LandingPad: 
+        <select name="LandingPad">
+            {% for l in landing_pads %}
+            <option value="{{ l }}">{{ l }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        Block: <input type="number" name="Block"><br><br>
+        ReusedCount: <input type="number" name="ReusedCount"><br><br>
+
+        Serial: 
+        <select name="Serial">
+            {% for s in serials %}
+            <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction is not none %}
+        <h3>Prediction: {{ prediction }}</h3>
+    {% endif %}
+</body>
+</html>
+
+ -->
+
+ <!-- templates/form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaceX Landing Prediction</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("https://imgs.search.brave.com/jt_s9hbQQ8JcK5xEEs6BEMUhVYn2nwx-WnoCtGxPYNw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDIyODQ1/NjAuanBn");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(182, 180, 180, 0.36);
+            width: 500px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #8e5c01;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #292828e4;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #c16b1b9e;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            color: rgba(46, 45, 45, 0.589);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6fa80ca4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #f55009;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Rocket Launch Details</h2>
+        <form action="/predict/" method="post">
+            <label>FlightNumber:</label>
+            <input type="number" name="FlightNumber">
+
+            <label>PayloadMass:</label>
+            <input type="number" step="any" name="PayloadMass">
+
+            <label>Orbit:</label>
+            <select name="Orbit">
+                {% for o in orbits %}
+                <option value="{{ o }}">{{ o }}</option>
+                {% endfor %}
+            </select>
+
+            <label>LaunchSite:</label>
+            <select name="LaunchSite">
+                {% for l in launch_sites %}
+                <option value="{{ l }}">{{ l }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Flights:</label>
+            <input type="number" name="Flights">
+
+            <label>GridFins:</label>
+            <select name="GridFins">
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+
+            <label>Reused:</label>
+            <select name="Reused">
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+
+            <label>Legs:</label>
+            <select name="Legs">
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+
+            <label>LandingPad:</label>
+            <select name="LandingPad">
+                {% for l in landing_pads %}
+                <option value="{{ l }}">{{ l }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Block:</label>
+            <input type="number" name="Block">
+
+            <label>ReusedCount:</label>
+            <input type="number" name="ReusedCount">
+
+            <label>Serial:</label>
+            <select name="Serial">
+                {% for s in serials %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction is not none %}
+            <h1>Prediction: {{ prediction }}</h1>
+        {% endif %}
+    </div>
+</body>
+</html>
