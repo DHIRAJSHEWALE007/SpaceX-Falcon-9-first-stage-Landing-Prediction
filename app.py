@@ -1,45 +1,7 @@
-# from fastapi import FastAPI
-# from fastapi.templating import Jinja2Templates
-# from fastapi.responses import RedirectResponse
-# from fastapi.responses import Response
-
-# from fastapi import FastAPI, Request, Form
-# from fastapi.templating import Jinja2Templates
-# from fastapi.responses import HTMLResponse
-
-# from SpaceXF9LandingPred.pipeline.prediction import PredictionPipeline
+from fastapi.responses import Response
 
 import uvicorn
-# import sys
-# import os
-
-# # text:str = "What is Text-Summarization ?"
-
-# app = FastAPI()
-# # templates = Jinja2Templates(directory="templates")
-
-# @app.get("/",tags=["authentication"])
-# async def index():
-#     return RedirectResponse(url="/docs")
-
-# @app.get("/train")
-# async def training():
-#     try:
-#         os.system("python main.py")
-#         return Response("Training Successful !!")
-    
-#     except Exception as e:
-#         return Response(f"Error Occured! {e}")
-
-# @app.post("/inference")
-# async def predict_route(X):
-#     try:
-#         pipe =  PredictionPipeline()
-#         prediction = pipe.predict(X)[0]
-#         return prediction
-    
-#     except Exception as e:
-#         raise e
+import os
 
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
@@ -48,7 +10,8 @@ from fastapi.staticfiles import StaticFiles
 from SpaceXF9LandingPred.pipeline.prediction import PredictionPipeline
 import pandas as pd
 
-app = FastAPI()
+application = FastAPI()
+app = application
 
 templates = Jinja2Templates(directory="templates")
 
@@ -75,6 +38,25 @@ async def read_form(request: Request):
         "landing_pads": LANDING_PADS,
         "serials": SERIALS
     })
+
+@app.get("/train")
+async def training():
+    try:
+        os.system("python main.py")
+        return Response("Training Successful !!")
+    
+    except Exception as e:
+        return Response(f"Error Occured! {e}")
+    
+@app.post("/inference")
+async def predict_route(X):
+    try:
+        pipe =  PredictionPipeline()
+        prediction = pipe.predict(X)[0]
+        return prediction
+    
+    except Exception as e:
+        raise e
 
 
 @app.post("/predict/", response_class=HTMLResponse)
