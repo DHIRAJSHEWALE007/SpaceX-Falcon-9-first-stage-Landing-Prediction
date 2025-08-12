@@ -10,8 +10,8 @@ from fastapi.staticfiles import StaticFiles
 from SpaceXF9LandingPred.pipeline.prediction import PredictionPipeline
 import pandas as pd
 
-application = FastAPI()
-app = application
+app = FastAPI()
+
 
 templates = Jinja2Templates(directory="templates")
 
